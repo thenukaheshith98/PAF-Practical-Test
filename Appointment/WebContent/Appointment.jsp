@@ -38,13 +38,13 @@
   
    <br>
 
-   
-   <%
-   
-   Appointment a = new Appointment();
-     System.out.print(a.readItems());
-   %>
-
+  		 <div id="divItemsGrid"> 
+			 <%
+			   
+			   Appointment a = new Appointment();
+			     System.out.print(a.readItems());
+			   %>
+		</div>
 
 			</div>
 		</div>

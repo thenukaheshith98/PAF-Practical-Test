@@ -18,7 +18,7 @@ public class Appointment {
 			//Provide the correct details: DBServer/DBName, username, password
 			con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/appointmentapiproject?useTimezone=true&serverTimezone=UTC", "root", "");
 			// For testing
-			System.out.println("Successfully connected---1");
+			System.out.println("Successfully connected");
 			
 		}
 		catch (Exception e)
@@ -38,10 +38,13 @@ public class Appointment {
 					return "Error while connecting to the database for reading.";
 				}
 				// Prepare the html table to be displayed
-				output = "<table border='1'><tr><th>Patirnt ID</th> <th>Patient Name</th><th>Patient Age</th><th>Type Of Case</th><th>Doctor Name</th><th>Update</th><th>Remove</th></tr>";
+				output ="<table border='1'><tr><th>Patirnt ID</th><th>Patient Name</th><th>Patient Age</th>" 
+							+ "<th>Type Of Case</th><th>Doctor Name</th><th>Update</th><th>Remove</th></tr>";  
+
 				String query = "SELECT * FROM appointmnets";
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(query);
+				
 				// iterate through the rows in the result set
 				while (rs.next())
 				{
@@ -52,7 +55,10 @@ public class Appointment {
 					String d_name = rs.getString("d_name"); 
 
 					// Add into the html table
-					output += "<tr><td><input id='hidItemIDUpdate'name='hidItemIDUpdate' type='hidden'value='" + p_id + "'>" + p_name + "</td>";output += "<td>" + p_age + "</td>";output += "<td>" + type_of_case + "</td>";output += "<td>" + d_name + "</td>";
+					output += "<tr><td><input id='hidItemIDUpdate'name='hidItemIDUpdate' type='hidden'value='" + p_id + "'>" + p_name + "</td>";
+					output += "<td>" + p_age + "</td>";
+					output += "<td>" + type_of_case + "</td>";
+					output += "<td>" + d_name + "</td>";
 					// buttons
 					output += "<td><input name='btnUpdate' type='button'"+ "value='Update'"+"class='btnUpdate btn btn-secondary'></td>"+"<td><input name='btnRemove' type='button'"+" value='Remove'"+"class='btnRemove btn btn-danger' data-itemid='"+ p_id + "'>" + "</td></tr>";
 				}
@@ -118,10 +124,7 @@ public class Appointment {
 				}
 				// create a prepared statement
 				String query = "UPDATE `appointmnets` SET `p_name`=?,`p_age`=?,`type_of_case`=?,`d_name`=? WHERE `p_id`=? ";
-			/*
-			 * "UPDATE items SET itemCode=?,itemName=?,ItemPrice=?,itemDesc=? WHERE itemID=?"
-			 * ;
-			 */
+			
 				PreparedStatement preparedStmt = con.prepareStatement(query);
 				// binding values
 				preparedStmt.setInt(1, Integer.parseInt(p_id));

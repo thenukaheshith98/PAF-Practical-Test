@@ -42,7 +42,7 @@
 			 <%
 			   
 			   Appointment a = new Appointment();
-			     System.out.print(a.readItems());
+			   out.print(a.readItems());
 			   %>
 		</div>
 

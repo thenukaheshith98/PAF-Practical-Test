@@ -35,7 +35,7 @@ $(document).on("click", "#btnSave", function(event) {
 		}
 	});
 
-	$("#formItem").submit();
+	//$("#formItem").submit();
 
 });
 
@@ -97,6 +97,7 @@ function onItemDeleteComplete(response, status) {
 $(document).on("click",".btnUpdate",function(event) {
 			$("#hidItemIDSave").val(
 					$(this).closest("tr").find('#hidItemIDUpdate').val());
+			$("#p_id").val($(this).closest("tr").find('td:eq(0)').text());
 			$("#p_name").val($(this).closest("tr").find('td:eq(1)').text());
 			$("#p_age").val($(this).closest("tr").find('td:eq(2)').text());
 			$("#type_of_case").val($(this).closest("tr").find('td:eq(3)').text());

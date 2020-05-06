@@ -55,12 +55,13 @@ public class Appointment {
 					String d_name = rs.getString("d_name"); 
 
 					// Add into the html table
-					output += "<tr><td><input id='hidItemIDUpdate'name='hidItemIDUpdate' type='hidden'value='" + p_id + "'>" + p_name + "</td>";
+					output += "<tr><td><input id='hidItemIDUpdate'name='hidItemIDUpdate' type='hidden' value='" + p_id + "'>" + p_id + "</td>";
+					output += "<td>" + p_name + "</td>";
 					output += "<td>" + p_age + "</td>";
 					output += "<td>" + type_of_case + "</td>";
 					output += "<td>" + d_name + "</td>";
 					// buttons
-					output += "<td><input name='btnUpdate' type='button'"+ "value='Update'"+"class='btnUpdate btn btn-secondary'></td>"+"<td><input name='btnRemove' type='button'"+" value='Remove'"+"class='btnRemove btn btn-danger' data-itemid='"+ p_id + "'>" + "</td></tr>";
+					output += "<td><input name='btnUpdate' type='button'"+ "value='Update'"+"class='btnUpdate btn btn-secondary'></td>"+"<td><input name='btnRemove' type='button'"+" value='Remove'"+"class='btnRemove btn btn-danger' data-p_id='"+ p_id + "'>" + "</td></tr>";
 				}
 				con.close();
 				// Complete the html table
@@ -127,11 +128,12 @@ public class Appointment {
 			
 				PreparedStatement preparedStmt = con.prepareStatement(query);
 				// binding values
-				preparedStmt.setInt(1, Integer.parseInt(p_id));
-				preparedStmt.setString(2, p_name);
-				preparedStmt.setInt(3, Integer.parseInt(p_age));
-				preparedStmt.setString(4, type_of_case);
-				preparedStmt.setString(5, d_name);
+				
+				preparedStmt.setString(1, p_name);
+				preparedStmt.setInt(2, Integer.parseInt(p_age));
+				preparedStmt.setString(3, type_of_case);
+				preparedStmt.setString(4, d_name);
+				preparedStmt.setInt(5, Integer.parseInt(p_id));
 				// execute the statement
 				preparedStmt.execute();
 				con.close();
@@ -147,7 +149,7 @@ public class Appointment {
 		}
 		
 		//delete items------------------------
-		public String deleteItem(String itemID) {
+		public String deleteItem(String p_id) {
 			String output = "";
 			try {
 				Connection con = connect();
@@ -155,10 +157,10 @@ public class Appointment {
 					return "Error while connecting to the database for deleting.";
 				}
 				// create a prepared statement
-				String query = "delete from items where itemID=?";
+				String query = "DELETE FROM `appointmnets` WHERE `p_id`=? ";
 				PreparedStatement preparedStmt = con.prepareStatement(query);
 				// binding values
-				preparedStmt.setInt(1, Integer.parseInt(itemID));
+				preparedStmt.setInt(1, Integer.parseInt(p_id));
 				// execute the statement
 				preparedStmt.execute();
 				con.close();

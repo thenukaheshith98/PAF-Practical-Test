@@ -65,6 +65,7 @@ public class AppointmentAPI extends HttpServlet {
 	 
 	 Map paras = getParasMap(request); 
 	 String output = a.updateItem(paras.get("hidItemIDSave").toString(),
+//	 paras.get("p_id").toString(),
 	 paras.get("p_name").toString(),
 	 paras.get("p_age").toString(),
 	 paras.get("type_of_case").toString(),
@@ -85,7 +86,7 @@ public class AppointmentAPI extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		Map paras = getParasMap(request);
-		String output = a.deleteItem(paras.get("itemID").toString());
+		String output = a.deleteItem(paras.get("p_id").toString());
 		response.getWriter().write(output);
 
 	}
